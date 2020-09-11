@@ -21,12 +21,25 @@ abstract class RestController extends KumbiaRest {
      * Aqui debe ir la autenticación de la API
      * ****************************************
      */
+
+    public $model;
+
     final protected function initialize() {
         
     }
 
     final protected function finalize() {
         
+    }
+
+    public function getall()
+    {
+        $this->data = (new $this->model)->find();
+    }
+
+    public function get($max, $page)
+    {
+        $this->data = (new $this->model)->paginate("per_page: $max", "page: $page");
     }
 
 }
